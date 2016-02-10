@@ -5,8 +5,8 @@
 #-------------------------------------------------------------
 
 #images are transformed into hue/saturation/value (hsv) color space
-#leaf mask was created by selecting all pixels above Otsu’s saturation threshold 
-#and below Otsu’s value threshold
+#leaf mask was created by selecting all pixels above Otsus saturation threshold 
+#and below Otsus value threshold
 #opening using a 15-pixel, disc-shaped kernel
 #A mask marking the lesion within the leaf is created 
 #by excluding all pixels that had a green or yellow hue within the leaf mask 
@@ -14,7 +14,7 @@
 #masks are visually confirmed by overlaying the masks with the original image 
 #using ImageJ
 #all leaves and lesions are phenotyped using the masks and the original raw image 
-#using computeFeatures.moment() and computeFeatures.shape() functions in ‘EBImage’ 
+#using computeFeatures.moment() and computeFeatures.shape() functions in EBImage 
 #which measures ~40 characteristics per object
 #including area, perimeter, major and minor axes,  and eccentricity in pixels
 #These thresholds and approaches will be tweaked for each different plant species 
@@ -124,15 +124,6 @@ Lf.mask <- Image(Obj %in% Obj.lvs, dim = c(Plate.row, Plate.col))
 #kern <- makeBrush(15,shape='disc')
 #Leaf.Area.Mask <- opening(Plate.mask,kern)
 writeImage(Lf.mask, gsub(".JPG", "_LeafMask.JPG", Files[i]))
-
-#Write a labeled image
-# Leaf.label <- bwlabel(Lf.mask)
-# xy = computeFeatures.moment(Leaf.label)[, c('m.cx', 'm.cy')]
-# font = drawfont(weight=600, size=46)
-# Leaf.label <- paintObjects(Leaf.label, Plate.cr2, col='#ffff00')
-# Leaf.label <- drawtext(Leaf.label, xy=xy, labels=as.character(1:nrow(xy)), font=font, col="yellow")
-# writeImage(Leaf.label, gsub(".CR2", "LeafLabel.JPG", Files[i]))
-# rm(Leaf.label)
 
 # Identify lesions
 #Try modifications here!
